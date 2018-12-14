@@ -1,0 +1,22 @@
+{
+    "name": "Sdkcodes/LaraPaystack",
+    "description": "A simple package for using paystack with laravel",
+    "type": "laravel-package",
+    "keywords": ["laravel paystack", "laravel", "paystack", "laravel payment", "paystack laravel", "laravel-5-package"],
+    "require": {
+        "laravel/framework": "^5.1",
+        "illuminate/support": "^5.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sdkcodes",
+            "email": "sdkcodes@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Sdkcodes\\LaraPaystack\\": "src/"
+        }
+    }
+}
