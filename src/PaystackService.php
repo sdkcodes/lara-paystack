@@ -39,6 +39,15 @@ class PaystackService
 	}
 
 	public function setSecretKey(){
+		
+		if (config('lara-paystack.use_env_as') == "production"){
+			$this->secretKey = env('PAYSTACK_LIVE_SECRET_KEY');
+			return;
+		}
+		if (config('lara-paystack.use_env_as') == "testing"){
+			$this->secretKey = env('PAYSTACK_TEST_SECRET_KEY');
+			return;
+		}
 		if (App::environment(['local', 'test', 'staging'])){
 			$this->secretKey = env('PAYSTACK_TEST_SECRET_KEY');
 		}
@@ -140,9 +149,10 @@ class PaystackService
 	/**
 	 * Initialize payment to paystack
 	 * @param array $payload 
-	 * @return App\Services\PaystackService
+	 * @return Sdkcodes\PaystackService
 	 */
 	public function initializeTransaction($payload){
+		
 		$this->doPostRequest('transaction/initialize', $payload);
 		$url = $this->getResponse()->data->authorization_url;
 		$this->setPaymentUrl($url);
