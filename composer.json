@@ -1,5 +1,5 @@
 {
-    "name": "Sdkcodes/lara-paystack",
+    "name": "sdkcodes/lara-paystack",
     "description": "A simple package for using paystack with laravel",
     "type": "laravel-package",
     "keywords": ["laravel paystack", "laravel", "paystack", "laravel payment", "paystack laravel", "laravel-5-package"],
