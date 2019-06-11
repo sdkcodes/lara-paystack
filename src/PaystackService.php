@@ -218,4 +218,9 @@ class PaystackService
 		$this->doPostRequest('transfer/finalize_transfer', $payload);
 		return $this->getResponse();
 	}
+
+	public function listBanks($payload=null){
+		$this->doGetRequest('bank');
+		return $this->getResponse();
+	}
 }

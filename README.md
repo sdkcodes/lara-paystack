@@ -95,6 +95,7 @@ As it stands, here are some of the things you can do with this package:
 * Initiate transfer
 * Finalize transfer
 * List transfer recipients
+* List Banks [new]
 
 I plan to keep updating the package and as time permits, cover all of Paystack's endpoints.
 
