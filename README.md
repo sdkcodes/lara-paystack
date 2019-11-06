@@ -96,6 +96,7 @@ As it stands, here are some of the things you can do with this package:
 * Finalize transfer
 * List transfer recipients
 * List Banks [new]
+* Initiate bulk transfer [new]
 
 I plan to keep updating the package and as time permits, cover all of Paystack's endpoints.
 
@@ -112,6 +113,48 @@ The `PAYSTACK_LIVE_SECRET_KEY` will be automatically used if your `APP_ENV` matc
 However, you can easily override the environment values by setting a `USE_ENV_AS` variable in your .env 
 
 `USE_ENV_AS` can have either values of `production` to simulate production environment or `testing` to simulate test environment
+
+## Examples
+### Bulk Transfer
+To use the package for Paystack's bulk transfer, you need to first disable OTP from your paystack dashboard.
+
+You will use the `doBulkTransfer(array $recipients, string $currency="NGN", string $source="balance")` method to carry out bulk transfer.
+
+Note: Only the first argument to the method is required
+
+```
+<?php
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Sdkcodes\LaraPaystack\PaystackService;
+
+class PaymentController{
+
+    /**
+    * Initiate bulk transfer and send money to multiple bank accounts at the same time
+    */
+    public function doMultipleTransfers(Request $request, PaystackService $paystack){
+        
+        // You can check this link for all fields that you can send to paystack https://developers.paystack.co/reference#initiate-bulk-transfer
+
+        $people = array(
+            [
+                'amount' => 50000,
+                'recipient' => 'RCP_m9yzgv4tbi6f20b'
+            ],
+            [
+                'amount' => 20000,
+                'recipient' => 'RCP_z6b9zeky5z379dn'
+            ]
+        );
+        
+        $response = $paystack->initiateBulkTransfer($people);
+      
+    }
+
+}
+```
 
 ### TODO
 Complete documentation

@@ -201,6 +201,16 @@ class PaystackService
 		return $this->getResponse();
 	}
 
+	public function initiateBulkTransfer(array $recipients, string $currency="NGN", string $source="balance"){
+		
+		$payload['currency'] = $currency;
+		$payload['source'] = $source;
+		$payload['transfers'] = $recipients;
+		
+		$this->doPostRequest('transfer/bulk', $payload);
+		return $this->getResponse();
+	}
+
 	public function listTransferRecipients(){
 		$this->doGetRequest('transferrecipient');
 		return $this->getResponse();
