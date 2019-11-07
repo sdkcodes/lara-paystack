@@ -5,6 +5,8 @@ namespace Sdkcodes\LaraPaystack;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 use Illuminate\Support\Facades\App;
+use InvalidArgumentException;
+use League\Flysystem\Exception;
 
 /**
  * Interface with paystack api
@@ -95,7 +97,7 @@ class PaystackService
 	    );
 	}
 
-	private function doGetRequest($relativeUrl, $usePayload=true){
+	private function doGetRequest($relativeUrl, $usePayload=true, array $payload=[]){
 		
 		$payload["secretKey"] = $this->getsecretKey();
 		try{
@@ -231,6 +233,26 @@ class PaystackService
 
 	public function listBanks($payload=null){
 		$this->doGetRequest('bank');
+		return $this->getResponse();
+	}
+
+	public function resolveAccountNumber(array $payload){
+		if (!array_key_exists('account_number', $payload)){
+			throw new InvalidArgumentException("The account number is missing in the payload");
+		}
+		if (!array_key_exists('bank_code', $payload)){
+			throw new InvalidArgumentException("The bank code is missing in the payload");
+		}
+		try{
+			$this->doGetRequest("bank/resolve", true, $payload);
+		}
+		catch(\Exception $ex){
+			
+			if ($ex->getCode() == 422){
+				throw new \Exception("Invalid account number", 422);
+			}
+		}
+		
 		return $this->getResponse();
 	}
 }
