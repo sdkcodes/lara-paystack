@@ -19,5 +19,12 @@
         "psr-4": {
             "Sdkcodes\\LaraPaystack\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sdkcodes\\LaraPaystack\\LaraPaystackServiceProvider"
+            ]
+        }
     }
 }
