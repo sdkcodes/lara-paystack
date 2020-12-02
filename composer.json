@@ -4,8 +4,8 @@
     "type": "laravel-package",
     "keywords": ["laravel paystack", "laravel", "paystack", "laravel payment", "paystack laravel", "laravel-5-package"],
     "require": {
-        "laravel/framework": "^5.1",
-        "illuminate/support": "^5.1",
+        "laravel/framework": ">=5.4",
+        "illuminate/support": ">=5.4",
         "guzzlehttp/guzzle": "~6.0"
     },
     "license": "MIT",
